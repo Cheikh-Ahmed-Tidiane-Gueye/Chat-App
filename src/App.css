@@ -1,0 +1,46 @@
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, Helvetica, sans-serif;
+}
+/* html, body{
+  width: 100%;
+  height: 100%;
+  background-image: url(./assets/img/backgroud3.jpg);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
+} */
+#root{
+  width: 100%;
+  height: 100vh;
+}
+.icon{
+  width: 50px;
+  height: 50px;
+}
+.icon2{
+  width: 60px;
+  height: 60px;
+}
+.mylogo{
+  width: 35px;
+  height: 35px;
+}
+.icon{
+  width: 15px;
+  height: 15px;
+}
+.input-group-text, input{
+  height: 45px;
+}
+.input-group-add-prof{
+  display: flex;
+  /* justify-content: center; */
+  /* width: 100%; */
+}
+.pointer{
+  cursor: pointer;
+}
