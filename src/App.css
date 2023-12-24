@@ -44,3 +44,9 @@
 .pointer{
   cursor: pointer;
 }
+/* password toggle */
+i{
+  position: relative;
+  top:12px;
+  right: 25px;
+}

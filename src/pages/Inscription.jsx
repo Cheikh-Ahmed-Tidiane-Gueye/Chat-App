@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 
 import user from "../assets/icons/user.png";
 import email from "../assets/icons/email.png";
@@ -13,6 +13,9 @@ import { auth, storage, db } from "../firebase";
 
 import toast, { Toaster } from "react-hot-toast";
 
+import { InputText } from "primereact/inputtext";
+import { Password } from "primereact/password";
+
 export default function Inscription() {
   // Recuperer la valeur des inputs
   async function handleSubmit(e) {
@@ -23,30 +26,49 @@ export default function Inscription() {
     const confirmPassword = e.target[3].value;
     const file = e.target[4].files[0];
 
+    if (password !== confirmPassword) {
+      // Afficher un toast si les mots de passe ne correspondent pas
+      toast.error("Les mots de passe ne correspondent pas");
+      return; // Arrêter le processus d'inscription
+    }
+
     try {
+      // Création d'un utilisateur avec l'email et le mot de passe fournis
       const res = await createUserWithEmailAndPassword(auth, email, password);
       console.log(res);
 
+      // Référence au stockage Firebase pour l'image de profil de l'utilisateur
       const storageRef = ref(storage, displayName);
-
+      // Début du téléchargement de l'image vers le stockage Firebase
       const uploadTask = uploadBytesResumable(storageRef, file);
-
+      // Écouteur d'événement pour la fin du téléchargement de l'image
       uploadTask.on(
         (error) => {
           console.error(error.code, error.message);
         },
         () => {
+          // Récupération de l'URL de téléchargement de l'image
           getDownloadURL(uploadTask.snapshot.ref).then(async (downloadURL) => {
+            // Mise à jour du profil utilisateur avec le nom et l'URL de l'image
             await updateProfile(res.user, {
               displayName,
               photoURL: downloadURL,
             });
+
+            // Création d'un document utilisateur dans Firestore
             await setDoc(doc(db, "users", res.user.uid), {
               uid: res.user.uid,
               displayName,
               email,
               photoURL: downloadURL,
             });
+            toast.success("Inscription reussis");
+            // Réinitialiser les valeurs des champs après une inscription réussie
+            e.target[0].value = ""; // Champ Prenom & Nom
+            e.target[1].value = ""; // Champ Email
+            e.target[2].value = ""; // Champ Mot de passe
+            e.target[3].value = ""; // Champ Confirmer mot de passe
+            e.target[4].value = null; // Champ de fichier
           });
         }
       );
@@ -68,15 +90,10 @@ export default function Inscription() {
             <span className="input-group-text bg-glass">
               <img src={user} alt="User" className="img-fluid icon2" />
             </span>
-            <input
-              type="text"
-              aria-label="Prenom"
-              name="prenom"
+            <InputText
               placeholder="Prenom & Nom"
-              id="prenom"
-              className="form-control"
-              autoComplete="off"
-              required
+              id="username"
+              aria-describedby="username-help"
             />
           </div>
 
@@ -86,37 +103,25 @@ export default function Inscription() {
             </span>
             <input
               type="email"
-              className="form-control"
+              className="form-control me-4"
               placeholder="dresse email"
               aria-label="email"
               aria-describedby="basic-addon1"
             />
           </div>
 
-          <div className="input-group mb-3">
+          <div className="input-group mb-3 d-flex justify-content-center align items-center">
             <span className="input-group-text" id="basic-addon1">
               <img src={password} alt="" className="icon2" />
             </span>
-            <input
-              type="password"
-              className="form-control"
-              placeholder="Mot de passe"
-              aria-label="mot de passe"
-              aria-describedby="basic-addon1"
-            />
+            <Password placeholder="Mot de passe" toggleMask />
           </div>
 
           <div className="input-group mb-3">
             <span className="input-group-text" id="basic-addon1">
               <img src={password} alt="" className="icon2" />
             </span>
-            <input
-              type="password"
-              className="form-control"
-              placeholder="Confirmer mot de passe"
-              aria-label="Confirmer mot de passe"
-              aria-describedby="basic-addon1"
-            />
+            <Password placeholder="Confirmer mot de passe" toggleMask />
           </div>
 
           <div className="input-group mb-3 input-group-add-prof">
