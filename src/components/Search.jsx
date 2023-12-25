@@ -10,7 +10,7 @@ export default function Search() {
     <div className="search">
       <div className="searchForm">
         <span className="p-input-icon-right">
-          <i className="pi pi-search ps-1" style={{ margin: "-3.8% -2px" }} />
+          <span className="pi pi-search"/>
           <InputText
             placeholder="Rechercher"
             className="input p-3 rounded-pill"

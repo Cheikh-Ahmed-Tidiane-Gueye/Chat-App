@@ -50,3 +50,9 @@ i{
   top:12px;
   right: 25px;
 }
+.pi-search{
+  position: absolute;
+  left: 85%;
+  bottom: 25%;
+  color: white;
+}
