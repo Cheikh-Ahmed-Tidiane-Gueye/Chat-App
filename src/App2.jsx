@@ -21,16 +21,17 @@ export default function App() {
   const rooter = createBrowserRouter([
     {
       path: "/",
-      element: <Accueil />,
+      element: <Test/>
+      // element: <Accueil />,
     },
-    {
-      path: "/connexion",
-      element: <Connexion />,
-    },
-    {
-      path: "/inscription",
-      element: <Inscription />,
-    },
+    // {
+    //   path: "/connexion",
+    //   element: <Connexion />,
+    // },
+    // {
+    //   path: "/inscription",
+    //   element: <Inscription />,
+    // },
   ]);
 
   return <RouterProvider router={rooter} />;
