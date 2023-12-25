@@ -14,7 +14,6 @@ import "./flags.css";
 import Accueil from "./pages/Accueil";
 import Connexion from "./pages/Connexion";
 import Inscription from "./pages/Inscription";
-import Test from "./pages/Test";
 
 export default function App() {
    
