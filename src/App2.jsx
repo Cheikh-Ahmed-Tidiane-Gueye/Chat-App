@@ -2,19 +2,15 @@ import React, { useState } from "react";
 import {
   createBrowserRouter,
   RouterProvider,
-  Navigate,
-  useNavigate,
-  Link
+  // Navigate,
+  // useNavigate,
+  // Link
 } from "react-router-dom";
 import { AuthContext } from "./context/AuthContext";
 
 import "./App.css";
 import "./style.scss";
 import "./flags.css";
-
-import Accueil from "./pages/Accueil";
-import Connexion from "./pages/Connexion";
-import Inscription from "./pages/Inscription";
 
 export default function App() {
 
@@ -24,16 +20,7 @@ export default function App() {
     {
       path: "/",
       element: <Test/>
-      // element: <Accueil />,
-    },
-    // {
-    //   path: "/connexion",
-    //   element: <Connexion />,
-    // },
-    // {
-    //   path: "/inscription",
-    //   element: <Inscription />,
-    // },
+    }
   ]);
 
   return (
