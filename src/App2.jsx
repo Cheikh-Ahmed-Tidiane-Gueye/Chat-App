@@ -11,6 +11,7 @@ import { AuthContext } from "./context/AuthContext";
 import "./App.css";
 import "./style.scss";
 import "./flags.css";
+import Test from "./pages/Test";
 
 export default function App() {
 
@@ -21,8 +22,8 @@ export default function App() {
       path: "/",
       element: <Test/>
     }
-  ]);
-
+  ])
+  
   return (
     <>
       <AuthContext.Provider value={""}>
