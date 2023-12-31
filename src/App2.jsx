@@ -6,6 +6,7 @@ import {
   useNavigate,
   Link
 } from "react-router-dom";
+import { AuthContext } from "./context/AuthContext";
 
 import "./App.css";
 import "./style.scss";
@@ -14,9 +15,10 @@ import "./flags.css";
 import Accueil from "./pages/Accueil";
 import Connexion from "./pages/Connexion";
 import Inscription from "./pages/Inscription";
-import Test from "./pages/Test";
 
 export default function App() {
+
+  const [theme, setTheme] = useState('light')
    
   const rooter = createBrowserRouter([
     {
@@ -34,5 +36,11 @@ export default function App() {
     // },
   ]);
 
-  return <RouterProvider router={rooter} />;
+  return (
+    <>
+      <AuthContext.Provider value={""}>
+        <RouterProvider router={rooter} />;
+      </AuthContext.Provider>
+    </>
+  );
 }
