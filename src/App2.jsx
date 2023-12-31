@@ -17,8 +17,6 @@ import Connexion from "./pages/Connexion";
 import Inscription from "./pages/Inscription";
 
 export default function App() {
-
-  const [theme, setTheme] = useState('light')
    
   const rooter = createBrowserRouter([
     {
