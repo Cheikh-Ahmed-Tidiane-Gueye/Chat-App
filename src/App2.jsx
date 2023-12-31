@@ -1,34 +1,30 @@
 import React, { useState } from "react";
-import {
-  createBrowserRouter,
-  RouterProvider,
-  // Navigate,
-  // useNavigate,
-  // Link
-} from "react-router-dom";
-import { AuthContext } from "./context/AuthContext";
-
-import "./App.css";
-import "./style.scss";
-import "./flags.css";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import MyContext from "./context/MyContext";
 import Test from "./pages/Test";
 
 export default function App() {
+  const theme = {
+    dark: {
+      background: "#000",
+      color: "#FFF",
+    },
+    light: {
+      background: "#FFF",
+      color: "#000",
+    },
+  };
 
-  const [theme, setTheme] = useState('light')
-   
   const rooter = createBrowserRouter([
     {
       path: "/",
-      element: <Test/>
-    }
-  ])
-  
+      element: <Test />,
+    },
+  ]);
+
   return (
-    <>
-      <AuthContext.Provider value={""}>
-        <RouterProvider router={rooter} />;
-      </AuthContext.Provider>
-    </>
+    <MyContext.Provider value={theme}>
+      <RouterProvider router={rooter} />
+    </MyContext.Provider>
   );
 }
